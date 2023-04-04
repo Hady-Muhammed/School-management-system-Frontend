@@ -1,25 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Suspense } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
+import SignUp from "./pages/SignUp";
+import { CircleSpinner, WaveSpinner } from "react-spinners-kit";
+import LoggedInRoutes from "./guards/LoggedInRoutes";
+import SignIn from "./pages/SignIn";
 
 function App() {
+  const location = useLocation();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes location={location} key={location.key}>
+        {/* LoggedIn Guard */}
+        <Route element={<LoggedInRoutes />}>
+          <Route
+            path="/signin"
+            element={
+              <Suspense
+                fallback={
+                  <div className="grid place-items-center h-screen bg-black">
+                    <CircleSpinner size={60} />
+                  </div>
+                }
+              >
+                <SignIn />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <Suspense
+                fallback={
+                  <div className="grid place-items-center h-screen bg-black">
+                    <WaveSpinner size={60} />
+                  </div>
+                }
+              >
+                <SignUp />
+              </Suspense>
+            }
+          />
+        </Route>
+      </Routes>
+    </>
   );
 }
 
