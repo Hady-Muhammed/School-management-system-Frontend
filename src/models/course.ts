@@ -1,4 +1,5 @@
-export interface Attendance {
+export interface Course {
+  id: string,
   name: string,
   description: string,
   Date: string,

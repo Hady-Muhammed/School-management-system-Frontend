@@ -52,12 +52,14 @@ const SignUp = () => {
       const formData = formRef.current.values
       const reqBody = {
         firstName: formData.name,
-        lastName: formData.firt,
+        lastName: formData.name,
         email: formData.email,
         password: formData.password,
-        confirmPassword: formData.firt,
+        dateOfBirth: new Date().toUTCString(),
+        confirmPassword: formData.password,
       };
       const res = await axios.post(API_URL + "/register/", reqBody);
+      console.log(res)
       if (res.data === "User already exists") {
         toast.error("User already exists!");
         setIsLoading(false)
