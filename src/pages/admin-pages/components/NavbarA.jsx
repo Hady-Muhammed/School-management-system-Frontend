@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import { useNavigate , Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
-const Navbar = () => {
+const NavbarA = () => {
   const navigate = useNavigate()
   const [opened, setOpened] = useState(false)
   const logOut = () => {
@@ -31,4 +31,4 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
+export default NavbarA

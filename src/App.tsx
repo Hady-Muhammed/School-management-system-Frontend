@@ -10,10 +10,14 @@ import HomeS from "./pages/student-pages/HomeS";
 import HomeT from "./pages/teacher-pages/HomeT";
 import AdminGuard from "./guards/AdminGuard";
 import HomeA from "./pages/admin-pages/HomeA";
-import Navbar from "./pages/admin-pages/components/Navbar";
-import Courses from "./pages/admin-pages/Courses";
+import NavbarA from "./pages/admin-pages/components/NavbarA";
+import CoursesA from "./pages/admin-pages/CoursesA";
 import CreateCourse from "./pages/admin-pages/CreateCourse";
 import ModifyCourse from "./pages/admin-pages/ModifyCourse";
+import NavbarS from "./pages/student-pages/components/NavbarS";
+import CoursesS from "./pages/student-pages/CoursesS";
+import Course from "./pages/student-pages/Course";
+import MyCoursesS from "./pages/student-pages/MyCourses";
 
 function App() {
   const location = useLocation();
@@ -62,7 +66,53 @@ function App() {
                   </div>
                 }
               >
+                <NavbarS />
                 <HomeS />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/s/courses"
+            element={
+              <Suspense
+                fallback={
+                  <div className="grid place-items-center h-screen bg-black">
+                    <CircleSpinner size={60} />
+                  </div>
+                }
+              >
+                <NavbarS />
+                <CoursesS />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/s/my-courses"
+            element={
+              <Suspense
+                fallback={
+                  <div className="grid place-items-center h-screen bg-black">
+                    <CircleSpinner size={60} />
+                  </div>
+                }
+              >
+                <NavbarS />
+                <MyCoursesS />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/s/courses/:id"
+            element={
+              <Suspense
+                fallback={
+                  <div className="grid place-items-center h-screen bg-black">
+                    <CircleSpinner size={60} />
+                  </div>
+                }
+              >
+                <NavbarS />
+                <Course />
               </Suspense>
             }
           />
@@ -94,7 +144,7 @@ function App() {
                   </div>
                 }
               >
-                <Navbar />
+                <NavbarA />
                 <HomeA />
               </Suspense>
             }
@@ -109,8 +159,8 @@ function App() {
                   </div>
                 }
               >
-                <Navbar />
-                <Courses />
+                <NavbarA />
+                <CoursesA />
               </Suspense>
             }
           />
