@@ -15,10 +15,7 @@ const StudentGuard = () => {
     isLoggedIn() && isStudent() ?
     <Outlet/> 
     :
-    isLoggedIn() && !isStudent() ?
-    <Navigate to='/t/'/>
-    :
-    <Navigate to='/signin'/> // Not loggedIn case
+    <Navigate to='/signin'/>
   )
 };
 

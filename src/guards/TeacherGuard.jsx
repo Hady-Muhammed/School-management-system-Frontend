@@ -16,10 +16,7 @@ const TeacherGuard = () => {
     isLoggedIn() && isTeacher() ?
     <Outlet/> 
     :
-    !isLoggedIn() ?
-    <Navigate to='/signin'/> // Not loggedIn case
-    :
-    <Navigate to='/s/'/>
+    <Navigate to='/signin'/>
   )
 };
 

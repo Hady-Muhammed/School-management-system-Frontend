@@ -15,10 +15,7 @@ const AdminGuard = () => {
     isLoggedIn() && isAdmin() ?
     <Outlet/> 
     :
-    isLoggedIn() && !isAdmin() ?
-    <Navigate to='/t/'/>
-    :
-    <Navigate to='/signin'/> // Not loggedIn case
+    <Navigate to='/signin'/>
   )
 };
 
