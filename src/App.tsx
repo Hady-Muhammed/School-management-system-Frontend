@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, Navigate } from "react-router-dom";
 import SignUp from "./pages/SignUp";
 import { CircleSpinner, WaveSpinner } from "react-spinners-kit";
 import SignIn from "./pages/SignIn";
@@ -12,13 +12,15 @@ import AdminGuard from "./guards/AdminGuard";
 import HomeA from "./pages/admin-pages/HomeA";
 import Navbar from "./pages/admin-pages/components/Navbar";
 import Courses from "./pages/admin-pages/Courses";
+import CreateCourse from "./pages/admin-pages/CreateCourse";
+import ModifyCourse from "./pages/admin-pages/ModifyCourse";
 
 function App() {
   const location = useLocation();
   return (
     <>
       <Routes location={location} key={location.key}>
-        {/* LoggedIn Guard */}
+        <Route path="/" element={<Navigate to="/signin" />}></Route>
         <Route element={<LoggedInGuard />}>
           <Route
             path="/signin"
@@ -109,6 +111,34 @@ function App() {
               >
                 <Navbar />
                 <Courses />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/a/courses/new-course"
+            element={
+              <Suspense
+                fallback={
+                  <div className="grid place-items-center h-screen bg-black">
+                    <CircleSpinner size={60} />
+                  </div>
+                }
+              >
+                <CreateCourse />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/a/courses/:id"
+            element={
+              <Suspense
+                fallback={
+                  <div className="grid place-items-center h-screen bg-black">
+                    <CircleSpinner size={60} />
+                  </div>
+                }
+              >
+                <ModifyCourse />
               </Suspense>
             }
           />

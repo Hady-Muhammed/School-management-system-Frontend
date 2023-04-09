@@ -5,10 +5,12 @@ import Logo from "../components/Logo";
 import img from "../assets/signin.webp";
 import axios from "axios";
 import { API_URL } from "../enviroment";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { Formik } from "formik";
+import ScrollAnimation from "react-animate-on-scroll";
+import "animate.css/animate.min.css";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -103,7 +105,7 @@ const SignIn = () => {
           </mask>
         </defs>
       </svg>
-      <div className="flex justify-center relative items-center overflow-auto lg:h-screen bg-gradient-to-r from-[#6a43ff] to-[#8d46ff]">
+      <div className="flex justify-center relative items-center overflow-auto lg:h-screen bg-gradient-to-r from-[#6a43ff] to-[#8d46ff] w-full">
         <svg
           className="absolute w-full h-full"
           xmlns="http://www.w3.org/2000/svg"
@@ -142,10 +144,7 @@ const SignIn = () => {
             </mask>
           </defs>
         </svg>
-        <main
-          data-aos="fade-up"
-          className="flex justify-between xs:flex-col lg:flex-row rounded-md relative overflow-hidden font-mont"
-        >
+        <main className="flex justify-between xs:flex-col lg:flex-row rounded-md relative overflow-hidden font-mont">
           <div className="flex flex-col xs:w-[100%] lg:w-[60%] bg-white p-10">
             <Formik
               initialValues={initialValues}
@@ -220,12 +219,12 @@ const SignIn = () => {
               src={img}
               alt="a"
             />
-            <a
-              href="/signup"
+            <Link
+              to="/signup"
               className=" w-1/2 mx-auto shadow-black/40 shadow-lg text-white bg-gradient-to-r to-black from-[#8d46ff] text-center cursor-pointer rounded-full p-2 block"
             >
               SIGN UP
-            </a>
+            </Link>
           </div>
         </main>
       </div>

@@ -17,7 +17,10 @@ import * as Yup from "yup";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { API_URL } from "../enviroment";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import React, { Component } from "react";
+import ScrollAnimation from "react-animate-on-scroll";
+import "animate.css/animate.min.css";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
@@ -40,16 +43,16 @@ const initialValues = {
 };
 
 const SignUp = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   // States
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("")
-  const formRef: any = useRef(null)
+  const [selectedOption, setSelectedOption] = useState("");
+  const formRef: any = useRef(null);
   // Functions
   const proceedSignUp = async () => {
-    if(selectedOption) {
-      const formData = formRef.current.values
+    if (selectedOption) {
+      const formData = formRef.current.values;
       const reqBody = {
         firstName: formData.name,
         lastName: formData.name,
@@ -59,19 +62,17 @@ const SignUp = () => {
         confirmPassword: formData.password,
       };
       const res = await axios.post(API_URL + "/register/", reqBody);
-      console.log(res)
+      console.log(res);
       if (res.data === "User already exists") {
         toast.error("User already exists!");
-        setIsLoading(false)
-      } 
-      else {
+        setIsLoading(false);
+      } else {
         toast.success("User created successfully!");
-        setIsLoading(false)
-        navigate("/signin")
+        setIsLoading(false);
+        navigate("/signin");
       }
     }
   };
-  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
@@ -120,10 +121,7 @@ const SignUp = () => {
           <Loader />
         </div>
       )}
-      <main
-        data-aos="fade-up"
-        className="flex justify-between xs:flex-col lg:flex-row rounded-md relative overflow-hidden font-mont"
-      >
+      <main className="flex justify-between xs:flex-col lg:flex-row rounded-md relative overflow-hidden font-mont">
         <div className="p-10 bg-white relative">
           {/* <!-- Logo --> */}
           <h3 className={`${true ? "text-[20px]" : "text-4xl"} font-bold`}>
@@ -137,8 +135,8 @@ const SignUp = () => {
           />
           <div className="relative z-30">
             <p className="my-6 flex items-center">
-              <span className="text-3xl text-[#8d46ff] font-bold">"</span>We're
-              born to raise a generation of well educated students!
+              <span className="text-3xl text-[#8d46ff] font-bold">"</span>
+              We're born to raise a generation of well educated students!
               <span className="text-3xl text-[#8d46ff] font-bold">"</span>
             </p>
             <p className="mx-auto w-fit my-6 relative before:w-[15px] before:h-[2px] before:absolute before:bg-[#8d46ff] before:top-1/2 before:translate-y-[-50%] before:left-[-25px] after:w-[15px] after:h-[2px] after:absolute after:bg-[#8d46ff] after:top-1/2 after:translate-y-[-50%] after:right-[-25px]">
@@ -163,7 +161,7 @@ const SignUp = () => {
           validationSchema={validationSchema}
           innerRef={formRef}
           onSubmit={(values, { setSubmitting }) => {
-            setOpen(true)
+            setOpen(true);
           }}
         >
           {({
@@ -246,9 +244,9 @@ const SignUp = () => {
               )}
               <p>
                 Already have an account?{" "}
-                <a href="/signin" className="text-[#6a43ff] font-semibold">
+                <Link to="/signin" className="text-[#6a43ff] font-semibold">
                   Sign in
-                </a>{" "}
+                </Link>{" "}
               </p>
               <button
                 disabled={isSubmitting}
@@ -276,7 +274,9 @@ const SignUp = () => {
       >
         <Fade in={open}>
           <div className="bg-white rounded-lg w-fit z-10 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10">
-            <h3 className="text-3xl font-semibold">Are you a student or teacher ?</h3>
+            <h3 className="text-3xl font-semibold">
+              Are you a student or teacher ?
+            </h3>
             <div className="flex mt-5">
               <RadioGroup
                 aria-labelledby="demo-radio-buttons-group-label"

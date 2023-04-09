@@ -1,9 +1,11 @@
 import React from 'react'
-import Navbar from './components/Navbar'
 
 const HomeA = () => {
   return (
-    <div>
+    <div className='h-[60vh] w-full grid place-items-center'>
+      <h1 className='font-bold xs:text-md sm:text-3xl'>
+        Welcome to the Admin authorities!
+      </h1>
     </div>
   )
 }
