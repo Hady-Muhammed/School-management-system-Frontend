@@ -1,4 +1,10 @@
-import { TextField } from "@mui/material";
+import {
+  InputLabel,
+  MenuItem,
+  OutlinedInput,
+  Select,
+  TextField,
+} from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -8,27 +14,43 @@ import { API_URL } from "../../enviroment";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs from "dayjs";
+import { useEffect, useState } from "react";
 
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
   description: Yup.string().required("Description is required"),
   date: Yup.string().required("Date is required"),
+  teacherId: Yup.string().required("Teacher's name is required"),
 });
 
 const initialValues = {
   name: "",
+  teacherId: "",
   description: "",
   date: dayjs(),
 };
 
 const CreateCourse = () => {
+  // States
+  const [teachers, setTeachers] = useState([]);
   // Functions
-  const createCourse = async ({ name, description, date }) => {
+  const createCourse = async ({ name, description, date, teacherId }) => {
     try {
       let body = {
         name,
         description,
         Date: date.format("YYYY-MM-DD"),
+        teacherId,
       };
       const token = localStorage.getItem("token");
       const { status } = await axios.post(API_URL + "/course/", body, {
@@ -45,6 +67,15 @@ const CreateCourse = () => {
       toast.error(error.message);
     }
   };
+  const getTeachers = async () => {
+    try {
+      const res = await axios.get(API_URL + "/teacher/");
+      setTeachers(res.data);
+    } catch (error) {}
+  };
+  useEffect(() => {
+    getTeachers();
+  }, []);
   return (
     <main className="xs:p-5 sm:p-20 h-screen grid place-items-center">
       <div className="w-full h-[80%]">
@@ -79,7 +110,7 @@ const CreateCourse = () => {
               </h1>
               <TextField
                 name="name"
-                label="Full Name"
+                label="Course's Name"
                 value={values.name}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -88,9 +119,30 @@ const CreateCourse = () => {
                 variant="standard"
                 required
               />
+              <InputLabel id="demo-multiple-name-label">
+                Teacher's Name
+              </InputLabel>
+              <Select
+                labelId="demo-multiple-name-label"
+                id="demo-multiple-name"
+                value={values.teacherId}
+                onChange={(e) => {
+                  setValues({ ...values, teacherId: e.target.value });
+                }}
+                required
+                error={Boolean(errors.teacherId) && touched.teacherId}
+                input={<OutlinedInput label="Teacher's Name" />}
+                MenuProps={MenuProps}
+              >
+                {teachers.map((teacher) => (
+                  <MenuItem key={teacher._id} value={teacher._id}>
+                    {teacher.firstName}
+                  </MenuItem>
+                ))}
+              </Select>
               <TextField
                 name="description"
-                label="Description"
+                label="Course's Description"
                 value={values.description}
                 onChange={handleChange}
                 onBlur={handleBlur}

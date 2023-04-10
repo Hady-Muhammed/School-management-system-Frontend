@@ -59,6 +59,7 @@ const SignUp = () => {
         email: formData.email,
         password: formData.password,
         dateOfBirth: new Date().toUTCString(),
+        role: selectedOption,
         confirmPassword: formData.password,
       };
       const res = await axios.post(API_URL + "/register/", reqBody);
