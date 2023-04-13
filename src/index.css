@@ -11,3 +11,6 @@
 .Mui-focused.MuiInputBase-underline:before {
   border-bottom-color: #6a43ff !important;
 }
+body{
+  background-color:beige;
+}
