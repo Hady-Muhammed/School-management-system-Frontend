@@ -17,7 +17,10 @@ import ModifyCourse from "./pages/admin-pages/ModifyCourse";
 import NavbarS from "./pages/student-pages/components/NavbarS";
 import CoursesS from "./pages/student-pages/CoursesS";
 import Course from "./pages/student-pages/Course";
-import MyCoursesS from "./pages/student-pages/MyCourses";
+import MyCoursesS from "./pages/student-pages/MyCoursesS";
+import NavbarT from "./pages/teacher-pages/components/NavbarT";
+import MyCoursesT from "./pages/teacher-pages/MyCoursesT";
+import CoursesT from "./pages/teacher-pages/CoursesT";
 
 function App() {
   const location = useLocation();
@@ -128,7 +131,38 @@ function App() {
                   </div>
                 }
               >
+                <NavbarT />
                 <HomeT />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/t/my-courses"
+            element={
+              <Suspense
+                fallback={
+                  <div className="grid place-items-center h-screen bg-black">
+                    <CircleSpinner size={60} />
+                  </div>
+                }
+              >
+                <NavbarT />
+                <MyCoursesT />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/t/courses"
+            element={
+              <Suspense
+                fallback={
+                  <div className="grid place-items-center h-screen bg-black">
+                    <CircleSpinner size={60} />
+                  </div>
+                }
+              >
+                <NavbarT />
+                <CoursesT />
               </Suspense>
             }
           />
