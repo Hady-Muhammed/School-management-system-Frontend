@@ -17,7 +17,7 @@ const NavbarT = () => {
     toast.success("Logged out successfully!")
   }
   return (
-    <nav className="flex justify-between items-center font-mont fixed w-full bg-transparent top-0 z-30 bg-gradient-to-r from-white to-[#8d46ff] shadow-md shadow-black/30 p-5 px-12">
+    <nav className="flex justify-between items-center font-mont fixed w-full bg-transparent top-0 z-30 bg-gradient-to-r from-white to-[#8d46ff] shadow-md shadow-black/30 p-5 px-12 z-50">
       {/* <!-- Logo --> */}
       <Link to="/" className='space-x-2'>
         <Logo/>
