@@ -30,6 +30,7 @@ const NavbarT = () => {
         <Link to="/t/" className="text-white text-xl font-bold">Home</Link>
         <Link to="/t/courses" className="text-white text-xl font-bold">All Courses</Link>
         <Link to="/t/my-courses" className="text-white text-xl font-bold">My Courses</Link>
+        <Link to="/t/createExam" className="text-white text-xl font-bold">Create Exam</Link>
         <Link onClick={logOut} className="text-white text-xl font-bold">Logout</Link>
       </ul>
       {/* <!-- Mobile Menu --> */}
@@ -38,6 +39,7 @@ const NavbarT = () => {
         <Link onClick={toggleMenu} to="/t/" className="text-white text-xl font-bold duration-500 hover:pl-5">Home</Link>
         <Link onClick={toggleMenu} to="/t/courses" className="text-white text-xl font-bold duration-500 hover:pl-5">All Courses</Link>
         <Link onClick={toggleMenu} to="/t/my-courses" className="text-white text-xl font-bold duration-500 hover:pl-5">My Courses</Link>
+        <Link onClick={toggleMenu} to="/t/createExam" className="text-white text-xl font-bold duration-500 hover:pl-5">Create Exam</Link>
         <Link onClick={logOut} className="text-white text-xl font-bold duration-500 hover:pl-5">Logout</Link>
       </ul>
     </nav>

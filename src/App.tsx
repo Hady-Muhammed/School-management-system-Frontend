@@ -21,6 +21,9 @@ import MyCoursesS from "./pages/student-pages/MyCoursesS";
 import NavbarT from "./pages/teacher-pages/components/NavbarT";
 import MyCoursesT from "./pages/teacher-pages/MyCoursesT";
 import CoursesT from "./pages/teacher-pages/CoursesT";
+import CreateExamForm from "./pages/teacher-pages/CreateExamForm ";
+import AdminDashboard from "./pages/admin-pages/AdminDashboard";
+import StudentDashboard from "./pages/student-pages/StudentDashboard ";
 
 function App() {
   const location = useLocation();
@@ -119,6 +122,21 @@ function App() {
               </Suspense>
             }
           />
+          <Route
+            path="/s/examination"
+            element={
+              <Suspense
+                fallback={
+                  <div className="grid place-items-center h-screen bg-black">
+                    <CircleSpinner size={60} />
+                  </div>
+                }
+              >
+                <NavbarS />
+                <StudentDashboard />
+              </Suspense>
+            }
+          />
         </Route>
         <Route element={<TeacherGuard />}>
           <Route
@@ -163,6 +181,21 @@ function App() {
               >
                 <NavbarT />
                 <CoursesT />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/t/createExam"
+            element={
+              <Suspense
+                fallback={
+                  <div className="grid place-items-center h-screen bg-black">
+                    <CircleSpinner size={60} />
+                  </div>
+                }
+              >
+                <NavbarT />
+                <CreateExamForm />
               </Suspense>
             }
           />
@@ -223,6 +256,21 @@ function App() {
                 }
               >
                 <ModifyCourse />
+              </Suspense>
+            }
+          />
+           <Route
+            path="/a/AdminDashboard"
+            element={
+              <Suspense
+                fallback={
+                  <div className="grid place-items-center h-screen bg-black">
+                    <CircleSpinner size={60} />
+                  </div>
+                }
+              >
+                <NavbarA />
+                <AdminDashboard />
               </Suspense>
             }
           />
