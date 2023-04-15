@@ -21,6 +21,8 @@ import MyCoursesS from "./pages/student-pages/MyCoursesS";
 import NavbarT from "./pages/teacher-pages/components/NavbarT";
 import MyCoursesT from "./pages/teacher-pages/MyCoursesT";
 import CoursesT from "./pages/teacher-pages/CoursesT";
+import CourseT from "./pages/teacher-pages/CourseT";
+import Footer from "./components/Footer";
 
 function App() {
   const location = useLocation();
@@ -71,6 +73,7 @@ function App() {
               >
                 <NavbarS />
                 <HomeS />
+                <Footer/>
               </Suspense>
             }
           />
@@ -86,6 +89,7 @@ function App() {
               >
                 <NavbarS />
                 <CoursesS />
+                <Footer/>
               </Suspense>
             }
           />
@@ -101,6 +105,7 @@ function App() {
               >
                 <NavbarS />
                 <MyCoursesS />
+                <Footer/>
               </Suspense>
             }
           />
@@ -116,6 +121,7 @@ function App() {
               >
                 <NavbarS />
                 <Course />
+                <Footer/>
               </Suspense>
             }
           />
@@ -133,6 +139,7 @@ function App() {
               >
                 <NavbarT />
                 <HomeT />
+                <Footer/>
               </Suspense>
             }
           />
@@ -148,6 +155,7 @@ function App() {
               >
                 <NavbarT />
                 <MyCoursesT />
+                <Footer/>
               </Suspense>
             }
           />
@@ -163,6 +171,23 @@ function App() {
               >
                 <NavbarT />
                 <CoursesT />
+                <Footer/>
+              </Suspense>
+            }
+          />
+          <Route
+            path="/t/my-courses/:id"
+            element={
+              <Suspense
+                fallback={
+                  <div className="grid place-items-center h-screen bg-black">
+                    <CircleSpinner size={60} />
+                  </div>
+                }
+              >
+                <NavbarT />
+                <CourseT />
+                <Footer/>
               </Suspense>
             }
           />

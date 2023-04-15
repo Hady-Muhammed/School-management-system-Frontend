@@ -62,16 +62,15 @@ const SignUp = () => {
         role: selectedOption,
         confirmPassword: formData.password,
       };
-      const res = await axios.post(API_URL + "/register/", reqBody);
-      console.log(res);
-      if (res.data === "User already exists") {
-        toast.error("User already exists!");
-        setIsLoading(false);
-      } else {
+      try {
+        const res = await axios.post(API_URL + "/register/", reqBody);
+        console.log(res);
         toast.success("User created successfully!");
-        setIsLoading(false);
         navigate("/signin");
+      } catch (error) {
+        toast.error("User already exists!");
       }
+      setIsLoading(false);
     }
   };
   const handleClose = () => setOpen(false);
