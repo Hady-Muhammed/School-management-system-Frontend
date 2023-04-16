@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { json } from "react-router-dom";
 import "./CreateExamForm .css";
 const CreateExamForm  = () => {
   const [examType, setExamType] = useState("");
@@ -14,7 +13,7 @@ const CreateExamForm  = () => {
     const fetchExistingExamData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/exam/6436cfd2b092b4dd04bc7c6e`
+          `http://localhost:5000/exam/6434a742dd1243a90af081c2`
         ); // Replace with your own API endpoint to fetch exam data
 
         if (response.ok) {
@@ -35,7 +34,7 @@ const CreateExamForm  = () => {
     };
 
     fetchExistingExamData();
-  }, ["6436cfd2b092b4dd04bc7c6e"]);
+  }, ["6434a742dd1243a90af081c2"]);
 
   const handleExamTypeChange = (event) => {
     setExamType(event.target.value);
@@ -99,7 +98,7 @@ const CreateExamForm  = () => {
     // Prepare exam data for API request
     const examData = {
       name: "courceName",
-      courseId: "6436cfd2b092b4dd04bc7c6e",
+      courseId: "6434a742dd1243a90af081c2",
       type: examType,
       questions: questions.map((question) => {
         return {
@@ -114,7 +113,7 @@ const CreateExamForm  = () => {
       if (checkData == true) {
         // Send exam data to backend API for exam update
         const response = await axios.put(
-          "http://localhost:5000/exam/6436cfd2b092b4dd04bc7c6e",
+          "http://localhost:5000/exam/6434a742dd1243a90af081c2",
           examData
         );
         console.log("Exam updated successfully:", response.data);
@@ -146,6 +145,7 @@ const CreateExamForm  = () => {
           <div>
             <label className="mb-3">Please Choose Exam Type: </label>
             <select
+              required
               value={examType}
               onChange={handleExamTypeChange}
               className="form-control w-25 mb-2"
@@ -163,6 +163,7 @@ const CreateExamForm  = () => {
               <label>Question:</label>
               <input
                 type="text"
+                required
                 name="question"
                 value={question.question}
                 className="form-control w-75"
@@ -173,6 +174,7 @@ const CreateExamForm  = () => {
                 <>
                   <label>Option 1:</label>
                   <input
+                  required
                     type="text"
                     name="option1"
                     className="form-control w-50"
@@ -181,6 +183,7 @@ const CreateExamForm  = () => {
                   />
                   <label>Option 2:</label>
                   <input
+                  required
                     type="text"
                     name="option2"
                     value={question.answers[1]}
@@ -189,6 +192,7 @@ const CreateExamForm  = () => {
                   />
                   <label>Option 3:</label>
                   <input
+                  required
                     type="text"
                     name="option3"
                     value={question.answers[2]}
@@ -197,6 +201,7 @@ const CreateExamForm  = () => {
                   />
                   <label>Option 4:</label>
                   <input
+                  required
                     type="text"
                     name="option4"
                     value={question.answers[3]}

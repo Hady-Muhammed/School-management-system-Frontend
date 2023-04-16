@@ -21,8 +21,12 @@ import MyCoursesS from "./pages/student-pages/MyCoursesS";
 import NavbarT from "./pages/teacher-pages/components/NavbarT";
 import MyCoursesT from "./pages/teacher-pages/MyCoursesT";
 import CoursesT from "./pages/teacher-pages/CoursesT";
+import CreateExamForm from "./pages/teacher-pages/CreateExamForm ";
+import AdminDashboard from "./pages/admin-pages/AdminDashboard";
+import StudentDashboard from "./pages/student-pages/StudentDashboard ";
 import CourseT from "./pages/teacher-pages/CourseT";
 import Footer from "./components/Footer";
+import ExamPage from "./pages/student-pages/ExamPage";
 
 function App() {
   const location = useLocation();
@@ -125,6 +129,36 @@ function App() {
               </Suspense>
             }
           />
+          <Route
+            path="/s/examination"
+            element={
+              <Suspense
+                fallback={
+                  <div className="grid place-items-center h-screen bg-black">
+                    <CircleSpinner size={60} />
+                  </div>
+                }
+              >
+                <NavbarS />
+                <StudentDashboard />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/s/exam/:examId"
+            element={
+              <Suspense
+                fallback={
+                  <div className="grid place-items-center h-screen bg-black">
+                    <CircleSpinner size={60} />
+                  </div>
+                }
+              >
+                {/* <NavbarS /> */}
+                <ExamPage />
+              </Suspense>
+            }
+          />
         </Route>
         <Route element={<TeacherGuard />}>
           <Route
@@ -191,6 +225,21 @@ function App() {
               </Suspense>
             }
           />
+          <Route
+            path="/t/createExam"
+            element={
+              <Suspense
+                fallback={
+                  <div className="grid place-items-center h-screen bg-black">
+                    <CircleSpinner size={60} />
+                  </div>
+                }
+              >
+                <NavbarT />
+                <CreateExamForm />
+              </Suspense>
+            }
+          />
         </Route>
         <Route element={<AdminGuard />}>
           <Route
@@ -248,6 +297,21 @@ function App() {
                 }
               >
                 <ModifyCourse />
+              </Suspense>
+            }
+          />
+           <Route
+            path="/a/AdminDashboard"
+            element={
+              <Suspense
+                fallback={
+                  <div className="grid place-items-center h-screen bg-black">
+                    <CircleSpinner size={60} />
+                  </div>
+                }
+              >
+                <NavbarA />
+                <AdminDashboard />
               </Suspense>
             }
           />
