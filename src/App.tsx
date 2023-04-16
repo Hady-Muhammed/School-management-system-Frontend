@@ -145,7 +145,7 @@ function App() {
             }
           />
           <Route
-            path="/s/exam/:examId"
+            path="/s/exam/:examId/:studentId/:courseId"
             element={
               <Suspense
                 fallback={

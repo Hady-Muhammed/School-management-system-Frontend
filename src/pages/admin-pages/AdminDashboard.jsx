@@ -1,6 +1,17 @@
 
 import React, { useState, useEffect } from "react";
-import { Button, Table } from "@mui/material";
+import {
+  Button,
+  Container,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
+} from "@mui/material";
+
 import axios from "axios";
 import "./AdminDashboard.css";
 const AdminDashboard = () => {
@@ -9,15 +20,15 @@ const AdminDashboard = () => {
   useEffect(() => {
     // Fetch exams data from backend
     fetch("http://localhost:5000/exam/mangeExam") // Update the URL with your backend API endpoint
-      .then(response => response.json())
-      .then(data => setExams(data))
-      .catch(error => console.error("Error fetching exams:", error));
+      .then((response) => response.json())
+      .then((data) => setExams(data))
+      .catch((error) => console.error("Error fetching exams:", error));
   }, []);
 
   const handleTimeChange = (id, event) => {
     const { value } = event.target;
-    setExams(prevExams =>
-      prevExams.map(exam => {
+    setExams((prevExams) =>
+      prevExams.map((exam) => {
         if (exam._id === id) {
           return { ...exam, time: value };
         }
@@ -28,8 +39,8 @@ const AdminDashboard = () => {
 
   const handleDateChange = (id, event) => {
     const { value } = event.target;
-    setExams(prevExams =>
-      prevExams.map(exam => {
+    setExams((prevExams) =>
+      prevExams.map((exam) => {
         if (exam._id === id) {
           return { ...exam, date: value };
         }
@@ -37,10 +48,11 @@ const AdminDashboard = () => {
       })
     );
   };
-  const handleEndTimeChange = (id, event) => { // New event handler for endTime field
+  const handleEndTimeChange = (id, event) => {
+    // New event handler for endTime field
     const { value } = event.target;
-    setExams(prevExams =>
-      prevExams.map(exam => {
+    setExams((prevExams) =>
+      prevExams.map((exam) => {
         if (exam._id === id) {
           return { ...exam, endTime: value }; // Update endTime field
         }
@@ -48,74 +60,75 @@ const AdminDashboard = () => {
       })
     );
   };
-  const handleSave = exam => {
+  const handleSave = (exam) => {
     // console.log(exam.date);
     // console.log(new Date(`${exam.date}T${exam.time}`))
     // console.log(new Date(`${exam.date}T${exam.endTime}`))
     // // Update exam data on backend
-    axios.patch(`http://localhost:5000/exam/mangeExam/${exam._id}`, {
-              name: exam.name,
-              startDate:new Date(`${exam.date}T${exam.time}`),
-              endDate:new Date(`${exam.date}T${exam.endTime}`)
-            })
-     
-      .catch(error => console.error("Error updating exam:", error));
+    axios
+      .patch(`http://localhost:5000/exam/mangeExam/${exam._id}`, {
+        name: exam.name,
+        startDate: new Date(`${exam.date}T${exam.time}`),
+        endDate: new Date(`${exam.date}T${exam.endTime}`),
+      })
+
+      .catch((error) => console.error("Error updating exam:", error));
   };
 
   return (
-    <div className="examList">
-      <div className="container my-5 ">
-  
-      <h1 className="mb-4 text-center">Exam List</h1>
-      <Table >
-        <thead>
-          <tr>
-            <th>Exam</th>
-            <th>Date</th>
-            <th>Start Time</th>
-            <th>End Time</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {exams.map(exam => (
-            <tr key={exam._id}>
-              <td>{exam.name}</td>
-              <td>
-                <input
-                  type="date"
-                  value={exam.date}
-                  onChange={event => handleDateChange(exam._id, event)}
-                />
-              </td>
-              <td>
-                <input
-                  type="time"
-                  value={exam.time}
-                  onChange={event => handleTimeChange(exam._id, event)}
-                />
-              </td>
-              <td>
-                <input
-                  type="time"
-                  value={exam.endTime}
-                  onChange={(event) => handleEndTimeChange(exam._id, event)}
-                />
-              </td>
-              <td>
-                <Button
-                  variant="primary"
-                  onClick={() => handleSave(exam)}
-                >
-                  Save
-                </Button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-    </div>
-    </div>
+    <Container>
+      <h1 className="examListHeader">Exam List</h1>
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Exam</TableCell>
+              <TableCell>Date</TableCell>
+              <TableCell>Start Time</TableCell>
+              <TableCell>End Time</TableCell>
+              <TableCell>Actions</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {exams.map((exam) => (
+              <TableRow key={exam._id}>
+                <TableCell>{exam.name}</TableCell>
+                <TableCell>
+                  <TextField
+                    type="date"
+                    value={exam.date}
+                    onChange={(event) => handleDateChange(exam._id, event)}
+                  />
+                </TableCell>
+                <TableCell>
+                  <TextField
+                    type="time"
+                    value={exam.time}
+                    onChange={(event) => handleTimeChange(exam._id, event)}
+                  />
+                </TableCell>
+                <TableCell>
+                  <TextField
+                    type="time"
+                    value={exam.endTime}
+                    onChange={(event) => handleEndTimeChange(exam._id, event)}
+                  />
+                </TableCell>
+                <TableCell>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => handleSave(exam)}
+                  >
+                    Save
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Container>
   );
 };
 export default AdminDashboard;

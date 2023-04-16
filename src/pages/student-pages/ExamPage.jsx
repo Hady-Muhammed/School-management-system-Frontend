@@ -79,9 +79,9 @@
 
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"; // Import useParams hook from react-router-dom
-
+import axios from "axios";
 const ExamPage = () => {
-  const { examId } = useParams(); // Use useParams hook to get examId from URL parameter
+  const { examId,studentId,courseId } = useParams(); // Use useParams hook to get examId from URL parameter
   const [questions, setQuestions] = useState([]);
   const [examType, setExamType] = useState("");
   const [selectedAnswers, setSelectedAnswers] = useState({});
@@ -132,27 +132,26 @@ const ExamPage = () => {
   // Handler for submit button click event
   const handleSubmitButtonClick = async () => {
     try {
-      if (examType === "mcq") {
+      if (examType === "mcq" ||examType === "true_false") {
         // Calculate result for MCQ exams
         let score = 0;
         for (const question of questions) {
           if (question.correctAnswer === selectedAnswers[question._id]) {
-            score++;
+            score+=question.grade;
           }
         }
+        const resultData={
+          examId:examId,
+          studentId,
+          courseId,
+          result:score
+        }
         // Update backend with exam result
-        const response = await fetch(
-          `http://localhost:5000/exam/${examId}`,
-          {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ score })
-          }
-        ); // Replace with your own API endpoint to update exam result
-
-        if (response.ok) {
+        const response = await axios.post(
+          "http://localhost:5000/result",
+          resultData
+        );
+        if (response) {
           // Exam result updated successfully
           console.log("Exam result updated successfully");
         } else {
@@ -190,6 +189,7 @@ const ExamPage = () => {
       {questions.map((question,index) => (
           <div key={question._id}>
             <h3>Question {index + 1}</h3>
+            <h4>Grade:{question.grade}</h4>
        <p>{question.question}</p>
             {examType === "mcq" ||examType=="true_false" ? (
               <div>
@@ -200,7 +200,7 @@ const ExamPage = () => {
                       id={option}
                       name={question._id}
                       value={option}
-                      checked={selectedAnswers[question._id] === option}
+                      // checked={selectedAnswers[question._id] === option}
                       onChange={() =>
                         handleRadioButtonChange(question._id, `option${index+1}`)
                       }
