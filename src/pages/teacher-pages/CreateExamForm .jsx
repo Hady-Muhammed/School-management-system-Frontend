@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { json } from "react-router-dom";
 import "./CreateExamForm .css";
 const CreateExamForm  = () => {
   const [examType, setExamType] = useState("");

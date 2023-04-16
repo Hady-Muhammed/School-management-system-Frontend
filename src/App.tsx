@@ -24,6 +24,9 @@ import CoursesT from "./pages/teacher-pages/CoursesT";
 import CreateExamForm from "./pages/teacher-pages/CreateExamForm ";
 import AdminDashboard from "./pages/admin-pages/AdminDashboard";
 import StudentDashboard from "./pages/student-pages/StudentDashboard ";
+import CourseT from "./pages/teacher-pages/CourseT";
+import Footer from "./components/Footer";
+import ExamPage from "./pages/student-pages/ExamPage";
 
 function App() {
   const location = useLocation();
@@ -74,6 +77,7 @@ function App() {
               >
                 <NavbarS />
                 <HomeS />
+                <Footer/>
               </Suspense>
             }
           />
@@ -89,6 +93,7 @@ function App() {
               >
                 <NavbarS />
                 <CoursesS />
+                <Footer/>
               </Suspense>
             }
           />
@@ -104,6 +109,7 @@ function App() {
               >
                 <NavbarS />
                 <MyCoursesS />
+                <Footer/>
               </Suspense>
             }
           />
@@ -119,6 +125,7 @@ function App() {
               >
                 <NavbarS />
                 <Course />
+                <Footer/>
               </Suspense>
             }
           />
@@ -137,6 +144,21 @@ function App() {
               </Suspense>
             }
           />
+          <Route
+            path="/s/exam/:examId"
+            element={
+              <Suspense
+                fallback={
+                  <div className="grid place-items-center h-screen bg-black">
+                    <CircleSpinner size={60} />
+                  </div>
+                }
+              >
+                {/* <NavbarS /> */}
+                <ExamPage />
+              </Suspense>
+            }
+          />
         </Route>
         <Route element={<TeacherGuard />}>
           <Route
@@ -151,6 +173,7 @@ function App() {
               >
                 <NavbarT />
                 <HomeT />
+                <Footer/>
               </Suspense>
             }
           />
@@ -166,6 +189,7 @@ function App() {
               >
                 <NavbarT />
                 <MyCoursesT />
+                <Footer/>
               </Suspense>
             }
           />
@@ -181,6 +205,23 @@ function App() {
               >
                 <NavbarT />
                 <CoursesT />
+                <Footer/>
+              </Suspense>
+            }
+          />
+          <Route
+            path="/t/my-courses/:id"
+            element={
+              <Suspense
+                fallback={
+                  <div className="grid place-items-center h-screen bg-black">
+                    <CircleSpinner size={60} />
+                  </div>
+                }
+              >
+                <NavbarT />
+                <CourseT />
+                <Footer/>
               </Suspense>
             }
           />

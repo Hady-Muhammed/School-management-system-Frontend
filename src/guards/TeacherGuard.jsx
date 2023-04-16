@@ -5,7 +5,6 @@ const TeacherGuard = () => {
   const isTeacher = () => {
     const token = localStorage.getItem("token");
     const teacher = jwtDecode(token);
-    console.log(teacher)
     return teacher.role === 'teacher'
   };
   const isLoggedIn = () => {

@@ -17,7 +17,7 @@ const StudentDashboard = () => {
   const handleTakeExam = examId => {
     // Implement exam taking logic here
     console.log("Take exam with ID:", examId);
-    navigate(`/exam/${examId}`); // Navigate to exam page with exam ID as URL parameter
+    navigate(`/s/exam/${examId}`); // Navigate to exam page with exam ID as URL parameter
   };
 
   const isExamActive = exam => {
