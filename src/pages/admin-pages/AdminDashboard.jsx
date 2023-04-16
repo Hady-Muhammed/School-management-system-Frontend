@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import { Container, Table, Form, Button } from "react-bootstrap";
+import { Button, Table } from "@mui/material";
 import axios from "axios";
 import "./AdminDashboard.css";
 const AdminDashboard = () => {
@@ -69,14 +69,14 @@ const AdminDashboard = () => {
             <tr key={exam._id}>
               <td>{exam.name}</td>
               <td>
-                <Form.Control
+                <input
                   type="date"
                   value={exam.date}
                   onChange={event => handleDateChange(exam._id, event)}
                 />
               </td>
               <td>
-                <Form.Control
+                <input
                   type="time"
                   value={exam.time}
                   onChange={event => handleTimeChange(exam._id, event)}

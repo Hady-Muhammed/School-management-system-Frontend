@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {  Table, Button } from "react-bootstrap";
+import { Button, Table } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 
 const StudentDashboard = () => {
@@ -29,7 +29,7 @@ const StudentDashboard = () => {
   };
 
   return (
-    <Container>
+    <div>
       <h1>Student Dashboard</h1>
       <Table striped bordered hover responsive>
         <thead>
@@ -69,7 +69,7 @@ const StudentDashboard = () => {
           ))}
         </tbody>
       </Table>
-    </Container>
+    </div>
   );
 };
 
