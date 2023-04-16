@@ -30,6 +30,7 @@ const NavbarS = () => {
         <Link to="/s/" className="text-white text-xl font-bold">Home</Link>
         <Link to="/s/courses" className="text-white text-xl font-bold">Courses</Link>
         <Link to="/s/my-courses" className="text-white text-xl font-bold">My Courses</Link>
+        <Link to="/s/examination" className="text-white text-xl font-bold">Examination</Link>
         <Link onClick={logOut} className="text-white text-xl font-bold">Logout</Link>
       </ul>
       {/* <!-- Mobile Menu --> */}
