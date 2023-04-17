@@ -154,7 +154,7 @@ function App() {
                   </div>
                 }
               >
-                {/* <NavbarS /> */}
+                <NavbarS />
                 <ExamPage />
               </Suspense>
             }

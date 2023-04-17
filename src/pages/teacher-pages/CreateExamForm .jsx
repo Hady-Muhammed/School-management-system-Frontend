@@ -18,7 +18,7 @@ const CreateExamForm = () => {
     const fetchExistingExamData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/exam/mangeExam/6434a742dd1243a90af081c2`
+          `http://localhost:5000/exam/mangeExam/6431d6463ce404a87b6e2e10`
         ); // Replace with your own API endpoint to fetch exam data
 
         if (response.ok) {
@@ -39,7 +39,7 @@ const CreateExamForm = () => {
     };
 
     fetchExistingExamData();
-  }, ["6434a742dd1243a90af081c2"]);
+  }, ["6431d6463ce404a87b6e2e10"]);
 
   const handleExamTypeChange = (event) => {
     setExamType(event.target.value);
@@ -109,7 +109,7 @@ const CreateExamForm = () => {
     // Prepare exam data for API request
     const examData = {
       name: "courceName",
-      courseId: "6434a742dd1243a90af081c2",
+      courseId: "6431d6463ce404a87b6e2e10",
       type: examType,
       questions: questions.map((question) => {
         return {
@@ -125,7 +125,7 @@ const CreateExamForm = () => {
       if (checkData == true) {
         // Send exam data to backend API for exam update
         const response = await axios.put(
-          "http://localhost:5000/exam/6434a742dd1243a90af081c2",
+          "http://localhost:5000/exam/6431d6463ce404a87b6e2e10",
           examData
         );
         console.log("Exam updated successfully:", response.data);
