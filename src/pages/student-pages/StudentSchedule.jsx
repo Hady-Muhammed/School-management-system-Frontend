@@ -12,7 +12,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import "./StudentDashboard.css";
 import jwtDecode from "jwt-decode";
-const StudentDashboard = () => {
+const StudentSchedule = () => {
   const [exams, setExams] = useState([]);
   const { user_id } = jwtDecode(localStorage.getItem("token"));
   const navigate = useNavigate();
@@ -25,23 +25,11 @@ const StudentDashboard = () => {
       .catch(error => console.error("Error fetching exams:", error));
   }, []);
 
-  const handleTakeExam = (examId,courseId) => {
-    // Implement exam taking logic here
-    console.log("Take exam with ID:", examId);
-    navigate(`/s/exam/${examId}/${user_id}/${courseId}`); // Navigate to exam page with exam ID as URL parameter
-  };
-
-  const isExamActive = exam => {
-    // Check if exam is active based on current time compared to exam start time
-    const currentDate = new Date(); // Get current date and time
-    const examStartDate = new Date(`${exam.date}T${exam.startTime}`); // Get exam start date and time
-    const examEndDate = new Date(`${exam.date}T${exam.endTime}`); // Get exam end date and time
-    return currentDate >= examStartDate && currentDate < examEndDate;
-  };
+ 
 
   return (
     <Container style={{ marginTop: "10rem" }}>
-      <h1 className="studentDashboardHeader">Student Dashboard</h1>
+      <h1 className="studentDashboardHeader">Student Schedule</h1>
       <TableContainer>
         <Table>
           <TableHead>
@@ -50,7 +38,6 @@ const StudentDashboard = () => {
               <TableCell>Date</TableCell>
               <TableCell>Start Time</TableCell>
               <TableCell>End Time</TableCell>
-              <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -60,21 +47,7 @@ const StudentDashboard = () => {
                 <TableCell>{exam.date}</TableCell>
                 <TableCell>{exam.startTime}</TableCell>
                 <TableCell>{exam.endTime}</TableCell>
-                <TableCell>
-                  {isExamActive(exam) ? (
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={() => handleTakeExam(exam._id,exam.courseId)}
-                    >
-                      Join Exam
-                    </Button>
-                  ) : (
-                    <Button variant="contained" color="secondary" disabled>
-                      Exam Not Active
-                    </Button>
-                  )}
-                </TableCell>
+             
               </TableRow>
             ))}
           </TableBody>
@@ -84,5 +57,5 @@ const StudentDashboard = () => {
   );
 };
 
-export default StudentDashboard;
+export default StudentSchedule;
 

@@ -27,6 +27,9 @@ import StudentDashboard from "./pages/student-pages/StudentDashboard ";
 import CourseT from "./pages/teacher-pages/CourseT";
 import Footer from "./components/Footer";
 import ExamPage from "./pages/student-pages/ExamPage";
+import UserProfile from "./pages/student-pages/Profile";
+import StudentSchedule from "./pages/student-pages/StudentSchedule";
+import AdminSchedule from "./pages/admin-pages/AdminSchedule";
 
 function App() {
   const location = useLocation();
@@ -141,11 +144,12 @@ function App() {
               >
                 <NavbarS />
                 <StudentDashboard />
+                <Footer/>
               </Suspense>
             }
           />
           <Route
-            path="/s/exam/:examId"
+            path="/s/exam/:examId/:studentId/:courseId"
             element={
               <Suspense
                 fallback={
@@ -154,8 +158,41 @@ function App() {
                   </div>
                 }
               >
-                {/* <NavbarS /> */}
+                <NavbarS />
                 <ExamPage />
+                <Footer/>
+              </Suspense>
+            }
+          />
+          <Route
+            path="/s/profile"
+            element={
+              <Suspense
+                fallback={
+                  <div className="grid place-items-center h-screen bg-black">
+                    <CircleSpinner size={60} />
+                  </div>
+                }
+              >
+                <NavbarS />
+                <UserProfile />
+                <Footer/>
+              </Suspense>
+            }
+          />
+          <Route
+            path="/s/schedule"
+            element={
+              <Suspense
+                fallback={
+                  <div className="grid place-items-center h-screen bg-black">
+                    <CircleSpinner size={60} />
+                  </div>
+                }
+              >
+                <NavbarS />
+                <StudentSchedule />
+                <Footer/>
               </Suspense>
             }
           />
@@ -237,6 +274,7 @@ function App() {
               >
                 <NavbarT />
                 <CreateExamForm />
+                <Footer/>
               </Suspense>
             }
           />
@@ -312,6 +350,21 @@ function App() {
               >
                 <NavbarA />
                 <AdminDashboard />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/a/schedule"
+            element={
+              <Suspense
+                fallback={
+                  <div className="grid place-items-center h-screen bg-black">
+                    <CircleSpinner size={60} />
+                  </div>
+                }
+              >
+                <NavbarA />
+                <AdminSchedule />
               </Suspense>
             }
           />
