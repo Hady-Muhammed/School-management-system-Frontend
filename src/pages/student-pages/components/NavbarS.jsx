@@ -30,6 +30,9 @@ const NavbarS = () => {
         <Link to="/s/" className="text-white text-xl font-bold">Home</Link>
         <Link to="/s/courses" className="text-white text-xl font-bold">Courses</Link>
         <Link to="/s/my-courses" className="text-white text-xl font-bold">My Courses</Link>
+        <Link to="/s/examination" className="text-white text-xl font-bold">Examination</Link>
+        <Link to="/s/schedule" className="text-white text-xl font-bold">Schedule</Link>
+        <Link to="/s/profile" className="text-white text-xl font-bold">Profile</Link>
         <Link onClick={logOut} className="text-white text-xl font-bold">Logout</Link>
       </ul>
       {/* <!-- Mobile Menu --> */}
@@ -38,6 +41,9 @@ const NavbarS = () => {
         <Link onClick={toggleMenu} to="/s/" className="text-white text-xl font-bold duration-500 hover:pl-5">Home</Link>
         <Link onClick={toggleMenu} to="/s/courses" className="text-white text-xl font-bold duration-500 hover:pl-5">Courses</Link>
         <Link onClick={toggleMenu} to="/s/my-courses" className="text-white text-xl font-bold duration-500 hover:pl-5">My Courses</Link>
+        <Link onClick={toggleMenu} to="/s/examination" className="text-white text-xl font-bold duration-500 hover:pl-5">Examination</Link>
+        <Link onClick={toggleMenu} to="/s/schedule" className="text-white text-xl font-bold duration-500 hover:pl-5">Schedule</Link>
+        <Link onClick={toggleMenu} to="/s/Profile" className="text-white text-xl font-bold duration-500 hover:pl-5">Profile</Link>
         <Link onClick={logOut} className="text-white text-xl font-bold duration-500 hover:pl-5">Logout</Link>
       </ul>
     </nav>
