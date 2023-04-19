@@ -30,7 +30,7 @@ const MyCoursesT = () => {
       </div>
       <div className="xs:grid xl:grid-cols-2 pt-10 xs:gap-10 relative z-40">
         {courses.map((course) => (
-          <CourseCardT course={course} key={course._id} />
+          <CourseCardT course={course} key={course._id} createExam={true} />
         ))}
       </div>
       {!courses.length && (

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { API_URL } from '../../../enviroment'
 import defaultImage from "../../../assets/defaultcourseimage.webp"
 
-const CourseCardS = ({ course: crs }) => {
+const CourseCardS = ({ course: crs , createExam}) => {
   return (
   <Link to={crs._id} className="bg-white rounded-md shadow-md border hover:scale-[1.1] duration-300 cursor-pointer">
     <div className="space-y-2 p-5">
@@ -14,6 +14,10 @@ const CourseCardS = ({ course: crs }) => {
       </div>
       <h3 className="font-bold text-xl">{crs.name}</h3>
       <p className="text-sm text-black/50">{crs.description.slice(0,200) + " ....."}</p>
+      {
+        createExam && 
+      <button className='bg-black font-medium text-white px-4 py-2 rounded-md'>create exam</button>
+      }
     </div>
   </Link>
   )
