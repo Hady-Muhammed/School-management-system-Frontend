@@ -2,12 +2,13 @@ import axios from "axios";
 import { API_URL } from "../../../enviroment";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import defaultImage from '../../../assets/defaultcourseimage.webp'
 
 const CourseCard = ({ course: crs , courseDeleted }) => {
   const deleteCourse = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.delete(API_URL + `/course/${crs._id}`, {
+      await axios.delete(API_URL + `/course/${crs._id}`, {
         headers: {
           "x-token": token,
         },
@@ -20,10 +21,14 @@ const CourseCard = ({ course: crs , courseDeleted }) => {
     }
   };
   return (
-    <div className="bg-white rounded-md shadow-md overflow-hidden">
+    <div className="bg-white rounded-md shadow-xl overflow-hidden ">
       <div className="space-y-2 p-5">
+        <img className="w-full h-[200px] object-cover rounded-md" src={crs.image ? API_URL + `/assets/uploads/course/${crs.image}` : defaultImage} alt="" />
         <div className="text-sm text-black/50 flex justify-between">
-          <span>COURSE</span>
+          <div className="flex justify-between w-full">
+            <span>COURSE</span>
+            <span className="text-xs">{new Date(crs.Date).toUTCString()}</span>
+          </div>
           <span>{crs.postedAt}</span>
         </div>
         <h3 className="font-bold text-xl">{crs.name}</h3>

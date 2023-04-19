@@ -7,6 +7,7 @@ import axios from "axios";
 import Note from "./components/Note";
 import user from "../../assets/user.webp";
 import CourseProgram from "./components/CourseProgram";
+import defaultImage from "../../assets/defaultcourseimage.webp"
 
 const Course = () => {
   const { id } = useParams();
@@ -52,7 +53,7 @@ const Course = () => {
           },
         }
       );
-      console.log(res);
+      toast.success("Course enrolled successfully!")
       getCourse();
     } catch (error) {
       console.log(error);
@@ -82,6 +83,7 @@ const Course = () => {
           }
         );
         setContent("");
+        getNotes()
         toast.success("Note added successfully!");
       } catch (error) {
         console.log(error);
@@ -144,12 +146,13 @@ const Course = () => {
     <main className="pt-32 relative xs:px-5 sm:px-20">
       <button
         onClick={() => window.history.back()}
-        className="text-white shadow-black/40 shadow-lg bg-gradient-to-r from-[#6a43ff] to-[#8d46ff] rounded-md p-2 relative z-40"
+        className="text-white shadow-black/40 shadow-lg bg-gradient-to-r from-[#6a43ff] to-[#8d46ff] rounded-md p-2 relative z-40 mb-5"
       >
         Return
       </button>
       <div>
-        <h1 className="text-center font-bold text-3xl">{course.name}</h1>
+        <img className="w-full h-[200px] object-cover rounded-md" src={course.image ? API_URL + `/assets/uploads/course/${course.image}` : defaultImage} alt="" />
+        <h1 className="text-center font-bold text-3xl mt-5">{course.name}</h1>
         <p className="mt-10">{course.description}</p>
       </div>
       <div>
@@ -203,10 +206,15 @@ const Course = () => {
         </div>
       )}
       {/* Notes */}
-      <h3 className="font-bold text-3xl my-10">All Notes</h3>
+      {
+        notes && alreadyEnrolled &&
+        <h3 className="font-bold text-3xl my-10">All Notes</h3>
+      }
+      <div className="space-y-4">
       {notes.map((note) => (
         <Note note={note} key={note._id} />
       ))}
+      </div>
     </main>
   );
 };

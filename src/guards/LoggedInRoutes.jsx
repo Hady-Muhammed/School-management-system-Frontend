@@ -25,9 +25,9 @@ const LoggedInGuard = () => {
   return isLoggedIn() && isStudent() ? (
     <Navigate to="/s/" />
   ) : isLoggedIn() && isTeacher() ? (
-    <Navigate to="/s/" />
+    <Navigate to="/t/" />
   ) : isLoggedIn() && isAdmin() ? (
-    <Navigate to="/s/" />
+    <Navigate to="/a/" />
   ) : (
     <Outlet />
   );

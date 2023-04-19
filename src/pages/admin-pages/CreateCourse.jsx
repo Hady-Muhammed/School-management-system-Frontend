@@ -15,6 +15,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
+import defaultImage from "../../assets/defaultcourseimage.webp"
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -43,19 +44,22 @@ const initialValues = {
 const CreateCourse = () => {
   // States
   const [teachers, setTeachers] = useState([]);
+  const [file, setFile] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
   // Functions
   const createCourse = async ({ name, description, date, teacherId }) => {
     try {
-      let body = {
-        name,
-        description,
-        Date: date.format("YYYY-MM-DD"),
-        teacherId,
-      };
+      let formData = new FormData()
+      formData.append("name",name)
+      formData.append("description",description)
+      formData.append("Date",date.format("YYYY-MM-DD"))
+      formData.append("teacherId",teacherId)
+      formData.append("image",file)
       const token = localStorage.getItem("token");
-      const { status } = await axios.post(API_URL + "/course/", body, {
+      const { status } = await axios.post(API_URL + "/course/", formData, {
         headers: {
           "x-token": token,
+          "Content-Type": "multipart/form-data",
         },
       });
       if (status === 200) {
@@ -73,6 +77,14 @@ const CreateCourse = () => {
       setTeachers(res.data);
     } catch (error) {}
   };
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setImageUrl(e.target.result);
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
   useEffect(() => {
     getTeachers();
   }, []);
@@ -81,7 +93,7 @@ const CreateCourse = () => {
       <div className="w-full h-[80%]">
         <button
           onClick={() => window.history.back()}
-          className="text-white shadow-black/40 shadow-lg bg-gradient-to-r from-[#6a43ff] to-[#8d46ff] rounded-md p-2 relative z-40"
+          className="text-white shadow-black/40 shadow-lg bg-gradient-to-r from-[#6a43ff] to-[#8d46ff] rounded-md p-2 relative z-40 mb-5"
         >
           Return
         </button>
@@ -108,6 +120,8 @@ const CreateCourse = () => {
               <h1 className="font-bold text-3xl relative before:absolute before:w-[40px] before:h-[3px] before:left-1/2 before:translate-x-[-50%] before:bg-[#6a43ff] before:rounded-lg before:-bottom-2 text-center">
                 Create a new Course
               </h1>
+              {imageUrl && <img className="w-full h-[200px] object-cover rounded-md" src={imageUrl} alt="" />}
+              {!imageUrl && <img className="w-full h-[200px] object-cover rounded-md" src={defaultImage} alt="" />}
               <TextField
                 name="name"
                 label="Course's Name"
@@ -153,6 +167,8 @@ const CreateCourse = () => {
                 variant="standard"
                 required
               />
+              <label className="text-black/75" htmlFor="">Course's Image</label>
+              <input type="file" onChange={handleFileChange} />
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                   disablePast={true}
